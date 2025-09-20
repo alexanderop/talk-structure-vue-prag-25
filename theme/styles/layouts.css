@@ -1,3 +1,20 @@
+:root {
+  --color-fill: 33, 39, 55;
+  --color-text-base: 234, 237, 243;
+  --color-accent: 255, 107, 237;
+  --color-card: 52, 63, 96;
+  --color-card-muted: 138, 51, 123;
+  --color-border: 171, 75, 153;
+  
+  /* Ready-to-use RGB values */
+  --brand-bg: rgb(33, 39, 55);
+  --brand-text: rgb(234, 237, 243);
+  --brand-accent: rgb(255, 107, 237);
+  --brand-card: rgb(52, 63, 96);
+  --brand-card-muted: rgb(138, 51, 123);
+  --brand-border: rgb(171, 75, 153);
+}
+
 .slidev-layout {
   h1 + p {
     @apply -mt-2 opacity-50 mb-4;
