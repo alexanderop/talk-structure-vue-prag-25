@@ -168,8 +168,8 @@ layout: center
 class: 'text-center'
 ---
 
-Flat structure means grouping files by what they are 
-like <span style="color: #FF6BED;">components</span>, <span style="color: #FF6BED;">composables</span>, or <span style="color: #FF6BED;">utils</span> not by the feature they belong to.
+Flat structure means grouping files by <span v-mark.underline.red="1">what they are</span> 
+like <span v-mark.underline.red="2">components</span>, <span v-mark.underline.red="3">composables</span>, or <span v-mark.underline.red="4">utils</span> not by the feature they belong to.
 
 ---
 layout: default
@@ -464,10 +464,236 @@ layout: center
 <StructureHeadline type="modular" />
 
 ---
+layout: center
+class: 'text-center'
+---
+
+Modular monolith means grouping files by <span v-mark.underline.red="1">feature</span> 
+instead of <span v-mark.underline.red="2">file type</span>.
+
+It combines the <span v-mark.underline.red="3">simplicity of flat</span> with the <span v-mark.underline.red="4">organization of modules</span>.
+
+---
 layout: image
 image: '/images/modularMonolith.png'
 backgroundSize: contain
 ---
+
+---
+layout: default
+clicks: 4
+---
+
+<FolderTree
+  root
+  title="Simple Modular Structure (No Workspaces)"
+  :structure="`tractor-store/
+  src/
+    modules/
+      explore/
+        components/
+          ProductGrid.vue
+          CategoryFilter.vue
+        composables/
+          useProductSearch.js
+        store/
+          exploreStore.js
+      checkout/
+        components/
+          CartSummary.vue
+          CheckoutForm.vue
+        composables/
+          useCart.js
+        store/
+          cartStore.js
+      decide/
+        components/
+          ProductDetail.vue
+        composables/
+          useProductDetail.js
+    shared/
+      components/
+        Button.vue
+        Input.vue
+    App.vue
+    main.js`"
+  :open-on-clicks="[
+    '/tractor-store/src',
+    '/tractor-store/src/modules',
+    '/tractor-store/src/modules/explore',
+    '/tractor-store/src/modules/checkout'
+  ]"
+/>
+
+<div v-click="4" class="mt-6 p-4 bg-card rounded-lg">
+  <div class="text-lg font-bold mb-2" style="color: rgb(255, 107, 237);">💡 Key Insight</div>
+  <div class="opacity-80">Each module is internally <strong>ultra-thin</strong> - just a flat structure focused on one feature.</div>
+</div>
+
+---
+layout: default
+---
+
+# Flat vs Modular: Visual Comparison
+
+<div class="text-lg opacity-80 mb-8">Watch how files reorganize from type-based to feature-based grouping</div>
+
+````md magic-move
+```
+src/
+├── components/
+│   ├── ProductGrid.vue
+│   ├── CartSummary.vue
+│   ├── ProductDetail.vue
+│   └── CheckoutForm.vue
+├── composables/
+│   ├── useProductSearch.js
+│   ├── useCart.js
+│   └── useProductDetail.js
+└── stores/
+    ├── exploreStore.js
+    └── cartStore.js
+```
+
+```
+src/
+├── components/
+│   ├── ProductGrid.vue      # explore feature
+│   ├── ProductDetail.vue    # decide feature
+│   ├── CartSummary.vue      # checkout feature
+│   └── CheckoutForm.vue     # checkout feature
+├── composables/
+│   ├── useProductSearch.js  # explore feature
+│   ├── useProductDetail.js  # decide feature
+│   └── useCart.js           # checkout feature
+└── stores/
+    ├── exploreStore.js      # explore feature
+    └── cartStore.js         # checkout feature
+```
+
+```
+src/modules/
+├── explore/
+│   ├── components/ProductGrid.vue
+│   ├── composables/useProductSearch.js
+│   └── store/exploreStore.js
+├── decide/
+│   ├── components/ProductDetail.vue
+│   └── composables/useProductDetail.js
+└── checkout/
+    ├── components/CartSummary.vue
+    ├── components/CheckoutForm.vue
+    ├── composables/useCart.js
+    └── store/cartStore.js
+```
+````
+
+---
+layout: two-cols-header
+---
+
+# The Impact of Structure Choice
+
+::left::
+
+<VClicks>
+
+## ❌ Flat Problems
+
+- Mixed features in same folders
+- Hard to find related files  
+- Changes touch many folders
+- Components folder gets huge
+- New developers get lost easily
+- Testing becomes unfocused
+
+</VClicks>
+
+::right::
+
+<VClicks>
+
+## ✅ Modular Benefits
+
+- Related files grouped together
+- Clear feature boundaries
+- Changes stay within modules
+- Easy navigation for developers
+- Focused testing per module
+- AI-friendly organization
+
+</VClicks>
+
+---
+layout: center
+---
+
+# Benefits of Simple Modular Structure
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div v-click="1" class="p-4 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+    <div class="text-4xl mb-3">🎯</div>
+    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Feature Isolation</div>
+    <div class="text-sm opacity-80">All checkout logic lives in one place. No hunting across multiple folders.</div>
+  </div>
+  
+  <div v-click="2" class="p-4 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+    <div class="text-4xl mb-3">⚡</div>
+    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Zero Setup</div>
+    <div class="text-sm opacity-80">No extra configuration needed. Just create folders and start coding.</div>
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-8 mt-6">
+  <div v-click="3" class="p-4 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+    <div class="text-4xl mb-3">🔍</div>
+    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Easy Navigation</div>
+    <div class="text-sm opacity-80">Developers instantly know where to find or add checkout-related code.</div>
+  </div>
+  
+  <div v-click="4" class="p-4 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+    <div class="text-4xl mb-3">🧩</div>
+    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Ultra-Thin Modules</div>
+    <div class="text-sm opacity-80">Each module follows flat structure internally. Best of both worlds.</div>
+  </div>
+</div>
+
+---
+layout: center
+---
+
+# As Teams Grow, Workspaces Enhance Modular 👥
+
+<div class="text-lg opacity-80 mb-8">Simple folders work great, but workspaces solve import pain for larger teams</div>
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div v-click="1" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+    <div class="text-4xl mb-3">😕</div>
+    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Simple Folders Pain</div>
+    <div class="text-sm opacity-80 space-y-2">
+      <div>• <code>../../../modules/checkout/composables/useCart</code></div>
+      <div>• Long relative imports</div>
+      <div>• Hard to refactor paths</div>
+      <div>• No dependency isolation</div>
+    </div>
+  </div>
+  
+  <div v-click="2" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+    <div class="text-4xl mb-3">😍</div>
+    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Workspace Benefits</div>
+    <div class="text-sm opacity-80 space-y-2">
+      <div>• <code>@myapp/checkout/composables/useCart</code></div>
+      <div>• Clean package-style imports</div>
+      <div>• Easy refactoring support</div>
+      <div>• Independent module versions</div>
+    </div>
+  </div>
+</div>
+
+<div v-click="3" class="mt-8 p-4 bg-card rounded-lg">
+  <div class="text-lg font-bold text-primary mb-2">🎯 Sweet Spot</div>
+  <div class="opacity-80">Workspaces are perfect when you have multiple developers working on different modules</div>
+</div>
 
 ---
 layout: default
