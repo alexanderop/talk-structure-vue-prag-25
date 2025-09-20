@@ -1,6 +1,6 @@
 <template>
-  <Default class="quote">
-    <div class="my-auto">
+  <Default class="center">
+    <div class="flex flex-col justify-center items-center h-full text-center">
       <slot />
     </div>
   </Default>
