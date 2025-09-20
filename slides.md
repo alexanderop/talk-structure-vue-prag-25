@@ -5,7 +5,7 @@ website: alexop.dev
 handle: alexanderopalic
 mdc: true
 layout: image
-image: images/pragVue.png
+image: /images/pragVue.png
 favicon: https://alexop.dev/favicon.svg
 highlighter: shiki
 lineNumbers: true
@@ -250,13 +250,13 @@ class: 'text-center'
 
 ---
 layout: image
-image: 'images/tractorStoreOverview.png'
+image: '/images/tractorStoreOverview.png'
 backgroundSize: contain
 ---
 
 ---
 layout: image
-image: 'images/tractorDetail.png'
+image: '/images/tractorDetail.png'
 backgroundSize: contain
 ---
 
@@ -399,7 +399,7 @@ clicks: 3
 
 ---
 layout: image
-image: 'images/blogMicrofrontends.png'
+image: '/images/blogMicrofrontends.png'
 backgroundSize: contain
 ---
 
@@ -440,7 +440,7 @@ layout: default
 
 ---
 layout: image
-image: 'images/modularMonolith.png'
+image: '/images/modularMonolith.png'
 backgroundSize: contain
 ---
 
