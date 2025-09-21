@@ -302,6 +302,13 @@ layout: center
 <StructureHeadline type="micro" />
 
 ---
+layout: intro
+---
+
+# Raise your hand if you have  
+## worked on a project that used microfrontends
+
+---
 layout: quote
 class: 'text-center'
 ---
@@ -323,45 +330,225 @@ backgroundSize: contain
 ---
 
 ---
-layout: center
+layout: default
 ---
 
-<div class="grid grid-cols-2 gap-6 text-left">
+# 👥 Teams: Clear Boundaries
 
-<v-clicks>
+<div class="grid grid-cols-2 gap-8">
+  <div v-click="1">
+    <div class="text-xl font-bold mb-4 text-primary">Team Structure</div>
+    
+```
+apps/
+├── host/      ← Platform Team
+├── explore/   ← Discovery Team  
+├── decide/    ← Product Team
+└── checkout/  ← Commerce Team
+```
+  </div>
 
-<div class="p-6 rounded-lg border border-pink-500/30 bg-slate-800/50">
-  <h3 class="text-pink-400 font-bold mb-3">🏗️ Repository</h3>
-  <div class="text-white font-semibold">Monorepo with pnpm</div>
+  <div v-click="2">
+    <div class="text-xl font-bold mb-4 text-primary">Team Exports</div>
+    
+```ts
+// explore/mf.config.ts
+exposes: {
+  './HomePage': './src/HomePage.vue'
+}
+
+// decide/vite.config.ts  
+exposes: {
+  './ProductPage': './src/ProductPage.vue'
+}
+```
+  </div>
 </div>
 
-<div class="p-6 rounded-lg border border-pink-500/30 bg-slate-800/50">
-  <h3 class="text-pink-400 font-bold mb-3">⚡ Composition</h3>
-  <div class="text-white font-semibold">Client-side with Module Federation</div>
+<div v-click="3">
+<strong>Each team owns their business subdomain</strong>
 </div>
 
-<div class="p-6 rounded-lg border border-pink-500/30 bg-slate-800/50">
-  <h3 class="text-pink-400 font-bold mb-3">🚦 Routing</h3>
-  <div class="text-white font-semibold">Host owns routing</div>
+---
+layout: default
+---
+
+# 🏗️ Repository: Monorepo with pnpm
+
+<div v-click="1">
+
+```yaml
+# pnpm-workspace.yaml
+packages:
+  - 'apps/*'
+  - 'packages/*'
+```
+
 </div>
 
-<div class="p-6 rounded-lg border border-pink-500/30 bg-slate-800/50">
-  <h3 class="text-pink-400 font-bold mb-3">👥 Teams</h3>
-  <div class="text-white font-semibold">Explore, Decide, Checkout , Host</div>
+<div v-click="2">
+
+```
+tractor-store-mf/
+├── apps/
+│   ├── host/     ← Shell app
+│   ├── explore/  ← Discovery
+│   ├── decide/   ← Product details
+│   └── checkout/ ← Cart
+└── packages/
+    └── shared/   ← UI library
+```
+
 </div>
 
-<div class="p-6 rounded-lg border border-pink-500/30 bg-slate-800/50">
-  <h3 class="text-pink-400 font-bold mb-3">💬 Communication</h3>
-  <div class="text-white font-semibold">Events + localStorage</div>
+---
+layout: default
+---
+
+# ⚡ Composition: Module Federation
+
+<div v-click="1">
+
+```ts
+// Host loads remotes at runtime
+createInstance({
+  name: 'host',
+  remotes: [
+    { name: 'explore',  entry: 'http://localhost:3004/mf-manifest.json' },
+    { name: 'decide',   entry: 'http://localhost:5175/mf-manifest.json' },
+    { name: 'checkout', entry: 'http://localhost:3003/mf-manifest.json' },
+  ]
+})
+```
+
 </div>
 
-<div class="p-6 rounded-lg border border-pink-500/30 bg-slate-800/50">
-  <h3 class="text-pink-400 font-bold mb-3">🎨 UI Consistency</h3>
-  <div class="text-white font-semibold">Shared component library</div>
+<div v-click="2">
+
+```ts
+window.getComponent = (id: string) => loadRemote(id)
+```
+
 </div>
 
-</v-clicks>
+<div v-click="3">
+<strong>Load components dynamically with fallbacks</strong>
+</div>
 
+---
+layout: default
+---
+
+# 🚦 Routing: Host Owns All Routes
+
+<div v-click="1">
+
+```ts
+// Host router maps URLs to remote components
+const router = createRouter({
+  routes: [
+    { path: '/', component: remote('explore/HomePage') },
+    { path: '/product/:id', component: remote('decide/ProductPage') },
+    { path: '/checkout/cart', component: remote('checkout/CartPage') },
+  ]
+})
+```
+
+</div>
+
+<div v-click="2">
+
+```ts
+// remote() loads with fallbacks
+function remote(id: string) {
+  return defineAsyncComponent({
+    loader: () => window.getComponent(id),
+    loadingComponent: Loading,
+    errorComponent: ErrorFallback
+  })
+}
+```
+
+</div>
+
+<div v-click="3">
+<strong>Single source of truth for navigation</strong>
+</div>
+
+---
+layout: default
+---
+
+# 💬 Communication: Events + localStorage
+
+<div v-click="1">
+
+```ts
+// Navigation: any MF can trigger
+window.dispatchEvent(new CustomEvent('mf:navigate', { 
+  detail: { to: '/checkout/cart' } 
+}))
+
+// Host listens and routes
+window.addEventListener('mf:navigate', (e) => {
+  router.push(e.detail.to)
+})
+```
+
+</div>
+
+<div v-click="2">
+
+```ts  
+// Cart sync: checkout owns state
+window.addEventListener('add-to-cart', (e) => {
+  // update cart
+  localStorage.setItem('cart', JSON.stringify(cart))
+  window.dispatchEvent(new CustomEvent('updated-cart'))
+})
+```
+
+</div>
+
+<div v-click="3">
+<strong>No shared store - explicit events only</strong>
+</div>
+
+---
+layout: default
+---
+
+# 🎨 UI Consistency: Shared Library
+
+<div v-click="1">
+
+```vue
+<!-- packages/shared/Button.vue -->
+<template>
+  <button :style="{ backgroundColor: variant === 'primary' ? '#FF6BED' : '#344060' }">
+    <slot />
+  </button>
+</template>
+```
+
+</div>
+
+<div v-click="2">
+
+```vue
+<!-- All microfrontends import the same Button -->
+<script setup>
+import { Button } from '@tractor/shared'
+</script>
+<template>
+  <Button variant="primary">Add to Cart</Button>
+</template>
+```
+
+</div>
+
+<div v-click="3" class="text-2xl font-bold text-center mt-8" style="color: #FF6BED;">
+Shared components + tokens = visual cohesion
 </div>
 
 ---
@@ -506,6 +693,13 @@ layout: center
 <StructureHeadline type="modular" />
 
 ---
+layout: intro
+---
+
+# Raise your hand if you have  
+## worked on a modular monolith project
+
+---
 layout: center
 class: 'text-center'
 ---
@@ -521,172 +715,59 @@ layout: default
 
 # Flat vs Modular: Visual Comparison
 
-<div class="text-lg opacity-80 mb-8">Watch how files reorganize from type-based to feature-based grouping</div>
+<div class="text-lg opacity-80 mb-8">🎬 Watch how files reorganize from type-based to feature-based grouping</div>
 
 ````md magic-move
 ```
-src/
-├── components/
+📦 src/
+├── 🧩 components/
 │   ├── ProductGrid.vue
 │   ├── CartSummary.vue
 │   ├── ProductDetail.vue
 │   └── CheckoutForm.vue
-├── composables/
+├── 🎣 composables/
 │   ├── useProductSearch.js
 │   ├── useCart.js
 │   └── useProductDetail.js
-└── stores/
+└── 🗃️ stores/
     ├── exploreStore.js
     └── cartStore.js
 ```
 
 ```
-src/
-├── components/
-│   ├── ProductGrid.vue      # explore feature
-│   ├── ProductDetail.vue    # decide feature
-│   ├── CartSummary.vue      # checkout feature
-│   └── CheckoutForm.vue     # checkout feature
-├── composables/
-│   ├── useProductSearch.js  # explore feature
-│   ├── useProductDetail.js  # decide feature
-│   └── useCart.js           # checkout feature
-└── stores/
-    ├── exploreStore.js      # explore feature
-    └── cartStore.js         # checkout feature
+📦 src/
+├── 🧩 components/
+│   ├── ProductGrid.vue      # 🔍 explore feature
+│   ├── ProductDetail.vue    # 🎯 decide feature
+│   ├── CartSummary.vue      # 🛒 checkout feature
+│   └── CheckoutForm.vue     # 🛒 checkout feature
+├── 🎣 composables/
+│   ├── useProductSearch.js  # 🔍 explore feature
+│   ├── useProductDetail.js  # 🎯 decide feature
+│   └── useCart.js           # 🛒 checkout feature
+└── 🗃️ stores/
+    ├── exploreStore.js      # 🔍 explore feature
+    └── cartStore.js         # 🛒 checkout feature
 ```
 
 ```
-src/modules/
-├── explore/
-│   ├── components/ProductGrid.vue
-│   ├── composables/useProductSearch.js
-│   └── store/exploreStore.js
-├── decide/
-│   ├── components/ProductDetail.vue
-│   └── composables/useProductDetail.js
-└── checkout/
-    ├── components/CartSummary.vue
-    ├── components/CheckoutForm.vue
-    ├── composables/useCart.js
-    └── store/cartStore.js
+📦 src/modules/
+├── 🔍 explore/
+│   ├── 🧩 components/ProductGrid.vue
+│   ├── 🎣 composables/useProductSearch.js
+│   └── 🗃️ store/exploreStore.js
+├── 🎯 decide/
+│   ├── 🧩 components/ProductDetail.vue
+│   └── 🎣 composables/useProductDetail.js
+└── 🛒 checkout/
+    ├── 🧩 components/CartSummary.vue
+    ├── 🧩 components/CheckoutForm.vue
+    ├── 🎣 composables/useCart.js
+    └── 🗃️ store/cartStore.js
 ```
 ````
 
----
-layout: default
-clicks: 4
----
 
-<FolderTree
-  root
-  title="Simple Modular Structure (No Workspaces)"
-  :structure="`tractor-store/
-  src/
-    modules/
-      explore/
-        components/
-          ProductGrid.vue
-          CategoryFilter.vue
-        composables/
-          useProductSearch.js
-        store/
-          exploreStore.js
-      checkout/
-        components/
-          CartSummary.vue
-          CheckoutForm.vue
-        composables/
-          useCart.js
-        store/
-          cartStore.js
-      decide/
-        components/
-          ProductDetail.vue
-        composables/
-          useProductDetail.js
-    shared/
-      components/
-        Button.vue
-        Input.vue
-    App.vue
-    main.js`"
-  :open-on-clicks="[
-    '/tractor-store/src',
-    '/tractor-store/src/modules',
-    '/tractor-store/src/modules/explore',
-    '/tractor-store/src/modules/checkout'
-  ]"
-/>
-
-<div v-click="4" class="mt-6 p-4 bg-card rounded-lg">
-  <div class="text-lg font-bold mb-2" style="color: rgb(255, 107, 237);">💡 Key Insight</div>
-  <div class="opacity-80">Each module is internally <strong>ultra-thin</strong> - just a flat structure focused on one feature.</div>
-</div>
-
----
-layout: center
----
-
-# Benefits of Simple Modular Structure
-
-<div class="grid grid-cols-3 gap-6 mt-8">
-  <div v-click="1" class="p-4 border rounded-lg text-center" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-4xl mb-3">🎯</div>
-    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Feature Isolation</div>
-    <div class="text-sm opacity-80">All checkout logic lives in one place. No hunting across multiple folders.</div>
-  </div>
-  
-  <div v-click="2" class="p-4 border rounded-lg text-center" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-4xl mb-3">⚡</div>
-    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Zero Setup</div>
-    <div class="text-sm opacity-80">No extra configuration needed. Just create folders and start coding.</div>
-  </div>
-
-  <div v-click="3" class="p-4 border rounded-lg text-center" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-4xl mb-3">🔍</div>
-    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Easy Navigation</div>
-    <div class="text-sm opacity-80">Developers instantly know where to find or add checkout-related code.</div>
-  </div>
-</div>
-
----
-layout: two-cols-header
----
-
-# Modular Structure: Trade-offs
-
-::left::
-
-<VClicks>
-
-✅ Clear feature boundaries
-
-✅ Easy to find and work on code
-
-✅ Code reuse is simple
-
-✅ Tests stay focused inside each module
-
-✅ AI tools understand features better
-
-</VClicks>
-
-::right::
-
-<VClicks>
-
-❌ Setup takes more effort at the start
-
-❌ More folders to manage
-
-❌ Easy to over-engineer
-
-❌ Must manage module links and dependencies
-
-❌ Teams need to learn the pattern
-
-</VClicks>
 
 ---
 layout: default
@@ -804,147 +885,123 @@ const { login } = useAuth()
 layout: default
 ---
 
-# Simple Folders vs Workspaces
+# Custom Instructions in VS Code
 
-<div class="grid grid-cols-2 gap-8">
-  <div v-click="1" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">📁 Simple Folders</div>
-    
-    <div class="text-sm opacity-80 space-y-3">
-      <div><strong>Import:</strong><br><code>../../../modules/checkout/composables/useCart</code></div>
-      <div class="space-y-1">
-        <div>✅ Zero setup</div>
-        <div>❌ Long imports</div>
-        <div>❌ Hard refactoring</div>
-      </div>
-    </div>
-  </div>
+<div class="text-lg opacity-80 mb-8">Configure Copilot to understand your module-specific patterns</div>
 
-  <div v-click="2" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">📦 Workspaces</div>
-    
-    <div class="text-sm opacity-80 space-y-3">
-      <div><strong>Import:</strong><br><code>@myapp/checkout/composables/useCart</code></div>
-      <div class="space-y-1">
-        <div>✅ Clean imports</div>
-        <div>✅ Easy refactoring</div>
-        <div>⚠️ Initial setup</div>
-      </div>
-    </div>
-  </div>
-</div>
+```md
+<!-- src/modules/checkout/.instructions.md -->
+File: src/modules/checkout/.instructions.md
+applyTo: "**/*.vue,**/*.ts"
 
-<div v-click="3" class="mt-8 p-4 bg-card rounded-lg text-center">
-  <div class="text-lg font-bold text-primary mb-2">💡 When to Use Workspaces</div>
-  <div class="opacity-80">Multiple developers working on different modules, or when you need independent versioning</div>
-</div>
+Rules:
+- All prices in cents (not dollars) 
+- Use Pinia stores for state management
+- Components use "Checkout" prefix
+- Testing with Vitest + Testing Library
+```
 
----
-layout: intro
----
-
-# Why AI Loves Modular
-
----
-layout: center
----
-
-# AI + Modular Architecture = 💝
-
-<div class="text-lg opacity-80 mb-8">When features are organized together, AI can better understand your intent</div>
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-  <div v-click="1" class="p-4 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">🎯 Focused Context</div>
-    <div class="text-sm opacity-80 space-y-2">
-      <div>• All related files in one place</div>
-      <div>• AI sees the complete feature scope</div>
-      <div>• Better suggestions for feature changes</div>
-      <div>• Understands component relationships</div>
-    </div>
-  </div>
-  
-  <div v-click="2" class="p-4 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">📝 Smart Documentation</div>
-    <div class="text-sm opacity-80 space-y-2">
-      <div>• Module-specific CLAUDE.md files</div>
-      <div>• Copilot instructions per feature</div>
-      <div>• Context-aware code generation</div>
-      <div>• Domain-specific conventions</div>
-    </div>
-  </div>
+<div class="mt-8 p-4 bg-card rounded-lg">
+  <div class="text-lg font-bold text-primary mb-2">💡 How it works</div>
+  <div class="opacity-80">VS Code reads .instructions.md files and applies rules to matching file patterns within each module</div>
 </div>
 
 ---
 layout: default
 ---
 
-# AI-Friendly Documentation
+# Custom Instructions in Action
 
-<div class="text-lg opacity-80 mb-8 text-center">Add module-specific instructions to guide AI understanding</div>
+````md magic-move
+```vue
+<!-- ❌ Without instructions -->
+<script setup>
+const price = ref(19.99) // Uses dollars
+const store = useStore() // Generic naming
+</script>
 
-<div class="grid grid-cols-2 gap-8">
-  <div v-click="1" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">📄 CLAUDE.md Example</div>
-    
-    <div class="text-sm opacity-80 space-y-3">
-      <div><strong>Tech Stack:</strong> Vue 3, Pinia, TypeScript</div>
-      <div><strong>Module Focus:</strong> Shopping cart & orders</div>
-      <div><strong>Key Rule:</strong> All prices in cents (integer)</div>
-      <div><strong>Testing:</strong> Vitest + Testing Library</div>
-    </div>
+<template>
+  <div class="item">
+    <span>${{ price }}</span>
   </div>
+</template>
+```
 
-  <div v-click="2" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">🎯 Benefits</div>
-    
-    <div class="text-sm opacity-80 space-y-2">
-      <div>• AI knows your coding patterns</div>
-      <div>• Context-aware suggestions</div>
-      <div>• Domain-specific conventions</div>
-      <div>• Focused code generation</div>
-    </div>
+```vue
+<!-- ✅ With module instructions -->
+<script setup>
+const priceInCents = ref(1999) // Follows cents rule
+const checkoutStore = useCheckoutStore() // Module naming
+</script>
+
+<template>
+  <CheckoutCartItem>
+    <span>${{ (priceInCents / 100).toFixed(2) }}</span>
+  </CheckoutCartItem>
+</template>
+```
+````
+
+---
+layout: center
+---
+
+# The Context Problem
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div v-click="1" class="text-center">
+    <div class="text-5xl mb-4">😵‍💫</div>
+    <div class="font-bold text-xl mb-4">Flat Structure</div>
+    <div class="opacity-80">Copilot sees scattered files across many folders and struggles to understand feature relationships</div>
   </div>
-</div>
-
-<div v-click="3" class="mt-8 p-4 bg-card rounded-lg text-center">
-  <div class="text-lg font-bold text-primary mb-2">💡 Pro Tip</div>
-  <div class="opacity-80">Place CLAUDE.md files in each module to give AI the context it needs</div>
+  
+  <div v-click="2" class="text-center">
+    <div class="text-5xl mb-4">🎯</div>
+    <div class="font-bold text-xl mb-4">Modular Structure</div>
+    <div class="opacity-80">Copilot sees all related files together with module-specific instructions and suggests better code</div>
+  </div>
 </div>
 
 ---
 layout: center
 ---
 
-# AI Benefits in Practice
-
-<div class="grid grid-cols-3 gap-6 mt-8">
-  <div v-click="1" class="p-4 border rounded-lg text-center" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-4xl mb-3">🔍</div>
-    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Better Search</div>
-    <div class="text-sm opacity-80">"Show me all checkout validation logic" finds everything in one module</div>
-  </div>
-  
-  <div v-click="2" class="p-4 border rounded-lg text-center" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-4xl mb-3">⚡</div>
-    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Faster Generation</div>
-    <div class="text-sm opacity-80">AI sees related components and suggests consistent patterns</div>
-  </div>
-  
-  <div v-click="3" class="p-4 border rounded-lg text-center" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-    <div class="text-4xl mb-3">🎯</div>
-    <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Smarter Refactoring</div>
-    <div class="text-sm opacity-80">Understands feature boundaries when suggesting changes</div>
-  </div>
-</div>
-
-<div v-click="4" class="mt-8 p-4 bg-card rounded-lg">
-  <div class="text-lg font-bold text-primary mb-2">💡 Pro Tip</div>
-  <div class="opacity-80">Add module-specific instructions to help AI understand your domain logic and coding patterns</div>
-</div>
-
 ---
-layout: center
+layout: two-cols-header
+---
+
+# Modular Structure: Trade-offs
+
+::left::
+
+<VClicks>
+
+✅ Clear feature boundaries
+
+✅ Easy to find and work on code
+
+✅ Code reuse is simple
+
+✅ Tests stay focused inside each module
+
+</VClicks>
+
+::right::
+
+<VClicks>
+
+❌ Setup takes more effort at the start
+
+❌ More folders to manage
+
+❌ Easy to over-engineer
+
+❌ Must manage module links and dependencies
+
+❌ Teams need to learn the pattern
+
+</VClicks>
+
 ---
 
 # My Recommendation 🎯
@@ -959,7 +1016,7 @@ layout: center
       <div>• Works for all team sizes</div>
       <div>• Easier to maintain and refactor</div>
       <div>• Better developer experience</div>
-      <div>• AI-friendly structure</div>
+      <div>• VS Code/Copilot-friendly structure</div>
       <div>• Faster iteration cycles</div>
     </div>
   </div>
