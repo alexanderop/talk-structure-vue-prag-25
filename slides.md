@@ -298,7 +298,7 @@ class: 'text-center'
 ---
 
 <QuoteCard author="Luca Mezzalira">
-  "Microfrontends show the <span v-mark.underline.red="1">technical side of a business part</span>. They let teams <span v-mark.underline.red="2">build separately</span> with <span v-mark.underline.red="3">little shared code</span> and single team ownership."
+  "Microfrontends are the <span v-mark.underline.red="1">technical representation of a business subdomain</span>. They allow <span v-mark.underline.red="2">independent implementations</span> with <span v-mark.underline.red="3">minimal shared code</span> and single team ownership."
 </QuoteCard>
 
 ---
