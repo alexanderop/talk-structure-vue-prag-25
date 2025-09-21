@@ -882,60 +882,10 @@ const { login } = useAuth()
 </div>
 
 ---
-layout: center
+layout: intro
 ---
 
 # Why AI Coding tools love Modular
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-  <FeatureCard
-    v-click="1"
-    icon="🎯"
-    title="Better Code Discovery"
-    description="AI tools can quickly find relevant files when they're grouped by feature rather than scattered across type-based folders"
-  />
-  
-  <FeatureCard
-    v-click="2"
-    icon="🧠"
-    title="Focused Context Windows"
-    description="Modular structure helps AI load only relevant code into its limited context, leading to more accurate suggestions"
-  />
-</div>
-
----
-layout: center
----
-
-# What does *Context* mean in LLMs?
-
-<div class="grid grid-cols-3 gap-8 mt-8">
-  <FeatureCard
-    v-click="1"
-    icon="🧠"
-    title="Memory Window"
-    description="The text the model can 'see' at once"
-  />
-  
-  <FeatureCard
-    v-click="2"
-    icon="📜"
-    title="Tokens"
-    description="Measured in chunks of text (words/subwords)"
-  />
-  
-  <FeatureCard
-    v-click="3"
-    icon="⏳"
-    title="Limited"
-    description="Oldest tokens fall out when the window overflows"
-  />
-</div>
-
-<div v-click="4" class="mt-10 text-xl opacity-90">
-<strong>Context = the input window of tokens that conditions the model's output</strong>
-</div>
----
 
 
 ---
@@ -965,52 +915,62 @@ layout: center
 layout: center
 ---
 
-# Flat Structure: Context Chaos 😵
+# Flat Structure: Context Chaos
 
-<div class="text-lg opacity-80 mb-8">Let's ask the AI to <strong>"add a loading state to the cart"</strong></div>
-
-<div class="text-lg opacity-80 mb-8">The AI has to guess what's relevant from a huge components/ folder and scattered composables/</div>
-
-<div class="mt-8 p-6 border rounded-lg space-y-3 text-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-  <div><span class="text-red-400">❌</span> components/TodoList.vue</div>
-  <div><span class="text-green-400">✅</span> components/CartSummary.vue</div>
-  <div><span class="text-red-400">❌</span> composables/useTodos.ts</div>
-  <div><span class="text-red-400">❌</span> utils/dateHelpers.ts</div>
-  <div><span class="text-green-400">✅</span> composables/useCart.ts</div>
+<div class="text-2xl mb-8 text-center">
+Let's ask the AI to <strong>"add a loading state to the cart"</strong>
 </div>
 
-<div v-click="1" class="mt-8">
-  <FeatureCard
-    icon="⚠️"
-    title="Context Waste"
-    description="It wastes precious context on irrelevant files, leading to generic or incorrect suggestions"
-  />
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div>
+    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">AI sees scattered files:</div>
+    <div class="space-y-2 text-lg">
+      <div>• <span class="text-red-400">❌</span> components/TodoList.vue</div>
+      <div>• <span class="text-green-400">✅</span> components/CartSummary.vue</div>
+      <div>• <span class="text-red-400">❌</span> composables/useTodos.ts</div>
+      <div>• <span class="text-red-400">❌</span> utils/dateHelpers.ts</div>
+      <div>• <span class="text-green-400">✅</span> composables/useCart.ts</div>
+    </div>
+  </div>
+  
+  <div v-click="1" class="flex items-center">
+    <FeatureCard
+      icon="⚠️"
+      title="Result: Context Waste"
+      description="60% irrelevant files waste precious context space"
+    />
+  </div>
 </div>
 
 ---
 layout: center
 ---
 
-# Modular Structure: Focused Context ✅
+# Modular Structure: Focused Context
 
-<div class="text-lg opacity-80 mb-8">Let's ask the AI to <strong>"add a loading state to the cart"</strong></div>
-
-<div class="text-lg opacity-80 mb-8">The AI immediately knows to look inside the checkout module</div>
-
-<div class="mt-8 p-6 border rounded-lg space-y-3 text-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
-  <div><span class="text-green-400">✅</span> checkout/components/CartSummary.vue</div>
-  <div><span class="text-green-400">✅</span> checkout/components/CartItem.vue</div>
-  <div><span class="text-green-400">✅</span> checkout/composables/useCart.ts</div>
-  <div><span class="text-green-400">✅</span> checkout/store/cartStore.ts</div>
-  <div><span class="text-green-400">✅</span> checkout/types.ts</div>
+<div class="text-2xl mb-8 text-center">
+Same request: <strong>"add a loading state to the cart"</strong>
 </div>
 
-<div v-click="1" class="mt-8">
-  <FeatureCard
-    icon="🎯"
-    title="Perfect Context"
-    description="Every token in the context window is relevant, resulting in highly accurate, project-aware code"
-  />
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div>
+    <div class="text-xl font-bold mb-4" style="color: rgb(255, 107, 237);">AI looks inside checkout/:</div>
+    <div class="space-y-2 text-lg">
+      <div><span class="text-green-400">✅</span> checkout/components/CartSummary.vue</div>
+      <div><span class="text-green-400">✅</span> checkout/components/CartItem.vue</div>
+      <div><span class="text-green-400">✅</span> checkout/composables/useCart.ts</div>
+      <div><span class="text-green-400">✅</span> checkout/store/cartStore.ts</div>
+      <div><span class="text-green-400">✅</span> checkout/types.ts</div>
+    </div>
+  </div>
+  
+  <div v-click="1" class="flex items-center">
+    <FeatureCard
+      icon="🎯"
+      title="Result: Perfect Context"
+      description="100% relevant files = highly accurate code"
+    />
+  </div>
 </div>
 
 ---
@@ -1026,23 +986,53 @@ image: '/images/markvim.png'
 backgroundSize: contain
 ---
 
----
-layout: image
-image: '/images/markvimeditor.png'
-backgroundSize: contain
----
 
 ---
-layout: image
-image: '/images/markvimModules.png'
-backgroundSize: contain
+layout: default
+clicks: 4
 ---
 
----
-layout: image
-image: '/images/markvim.png'
-backgroundSize: contain
----
+
+<FolderTree
+  root
+  title="MARKVIM Modular Architecture"
+  :structure="`MARKVIM/
+  src/
+    app/
+    modules/
+      color-theme/
+      documents/
+      editor/
+      layout/
+      markdown-preview/
+      share/
+      shortcuts/
+    shared/
+    types/
+    app.vue
+  .github/
+    actions/
+    instructions/
+      color-theme.instructions.md
+      documents.instructions.md
+      editor.instructions.md
+      layout.instructions.md
+      markdown-preview.instructions.md
+      share.instructions.md
+      shared-components.instructions.md
+      shortcuts.instructions.md
+      testing.instructions.md
+    workflows/
+    copilot-instructions.md`"
+  :open-on-clicks="[
+    '/MARKVIM',
+    '/MARKVIM/src',
+    '/MARKVIM/src/modules',
+    '/MARKVIM/.github',
+    '/MARKVIM/.github/instructions'
+  ]"
+/>
+
 
 ---
 layout: image
@@ -1052,15 +1042,17 @@ backgroundSize: contain
 
 ---
 
-# copilot general instructions
+# General instructions
 
 ```md
 # MarkVim Development Instructions
 
+
 MarkVim is a Nuxt 3 Markdown editor with Vim mode support, built using a modular architecture.
 
-## Core Technologies & Framework Guidelines
+## Always look up Instructions first that could apply to a module
 
+## Core Technologies & Framework Guidelines
 - **Nuxt 3** - Vue.js meta-framework with auto-imports
 - **Pinia** - State management with persistence to localStorage
 - **CodeMirror 6** - Editor component with vim extension
@@ -1069,7 +1061,6 @@ MarkVim is a Nuxt 3 Markdown editor with Vim mode support, built using a modular
 - **Playwright + Cucumber** - E2E testing with BDD scenarios
 
 ## Development Commands
-
 Install dependencies: `pnpm install`  
 Start dev server: `pnpm dev`  
 Build: `pnpm build`  
@@ -1077,7 +1068,6 @@ Lint: `pnpm lint`
 Type check: `pnpm typecheck`  
 E2E tests: `pnpm test:e2e`
 
-## Always look up Instructions first that could apply to a module
 ```
 ---
 
@@ -1103,7 +1093,7 @@ and command history for efficient user interaction.
 
 ---
 layout: image
-image: '/images/shortCutInstruction.png'
+image: '/images/vscode.png'
 backgroundSize: contain
 ---
 
@@ -1124,6 +1114,8 @@ layout: two-cols-header
 ✅ Code reuse is simple
 
 ✅ Tests stay focused inside each module
+
+✅ Ai loves it 
 
 </VClicks>
 
@@ -1175,12 +1167,6 @@ layout: two-cols-header
     </div>
   </div>
 </div>
-
-<div v-click="3" class="mt-8 p-4 bg-card rounded-lg">
-  <div class="text-lg font-bold text-primary mb-2">💡 Start Simple, Evolve When Needed</div>
-  <div class="opacity-80">Begin with modular monolith. You can always extract modules into micro frontends later when organizational complexity demands it.</div>
-</div>
-
 
 ---
 layout: center
