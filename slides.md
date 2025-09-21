@@ -90,6 +90,37 @@ heading: About me
 </template>
 
 ---
+layout: center
+---
+
+# General Rules & Best Practices
+
+<div class="text-lg opacity-80 mb-8">Apply these naming conventions to any Vue project structure</div>
+
+<div class="grid grid-cols-3 gap-6 mt-8">
+  <FeatureCard
+    v-click="1"
+    icon="🏷️"
+    title="Base Component Prefix"
+    description="Use 'Base' prefix for UI components: BaseButton.vue, BaseTable.vue, BaseIcon.vue"
+  />
+  
+  <FeatureCard
+    v-click="2"
+    icon="🔗"
+    title="Related Component Grouping"
+    description="Group related components: TodoList.vue, TodoListItem.vue, TodoListItemButton.vue"
+  />
+  
+  <FeatureCard
+    v-click="3"
+    icon="📝"
+    title="Hierarchical Naming"
+    description="Start with highest-level words: SearchButtonClear.vue, SettingsCheckboxLaunch.vue"
+  />
+</div>
+
+---
 layout: quote
 ---
 

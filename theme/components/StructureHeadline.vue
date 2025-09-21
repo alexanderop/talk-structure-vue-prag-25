@@ -30,51 +30,23 @@
     </div>
   </div>
 
-  <!-- Animated version for micro type -->
+  <!-- Static version for micro type -->
   <div 
     v-else-if="type === 'micro'"
     class="structure-headline relative overflow-hidden rounded-2xl p-8 mb-8"
     :class="themeClass"
-    v-motion
-    :initial="{ opacity: 0, y: 50 }"
-    :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200 } }"
   >
-    <!-- Animated background gradient -->
-    <div class="absolute inset-0 opacity-20">
-      <div class="absolute inset-0 bg-gradient-to-r animate-pulse" :class="gradientClass"></div>
-    </div>
-    
-    <!-- Shimmer effect -->
-    <div class="absolute inset-0 opacity-30">
-      <div class="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent transform -skew-x-12"></div>
-    </div>
-    
     <!-- Content -->
     <div class="relative z-10 text-center">
-      <div 
-        class="text-8xl mb-4 inline-block transform transition-transform duration-700 hover:scale-110"
-        v-motion
-        :initial="{ scale: 0, rotate: -180 }"
-        :enter="{ scale: 1, rotate: 0, transition: { duration: 1000, delay: 500 } }"
-      >
+      <div class="text-8xl mb-4 inline-block">
         {{ icon }}
       </div>
       
-      <h2 
-        class="text-4xl font-bold mb-3 text-white"
-        v-motion
-        :initial="{ opacity: 0, x: -50 }"
-        :enter="{ opacity: 1, x: 0, transition: { duration: 600, delay: 700 } }"
-      >
+      <h2 class="text-4xl font-bold mb-3 text-white">
         {{ title }}
       </h2>
       
-      <p 
-        class="text-xl opacity-90 text-white max-w-2xl mx-auto"
-        v-motion
-        :initial="{ opacity: 0, x: 50 }"
-        :enter="{ opacity: 1, x: 0, transition: { duration: 600, delay: 900 } }"
-      >
+      <p class="text-xl opacity-90 text-white max-w-2xl mx-auto">
         {{ subtitle }}
       </p>
       
@@ -84,9 +56,6 @@
           v-for="i in 3" 
           :key="i"
           class="w-2 h-2 rounded-full bg-white opacity-60"
-          v-motion
-          :initial="{ scale: 0 }"
-          :enter="{ scale: 1, transition: { duration: 400, delay: 1100 + i * 100 } }"
         ></div>
       </div>
     </div>
