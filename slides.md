@@ -882,88 +882,229 @@ const { login } = useAuth()
 </div>
 
 ---
-layout: default
----
-
-# Custom Instructions in VS Code
-
-<div class="text-lg opacity-80 mb-8">Configure Copilot to understand your module-specific patterns</div>
-
-```md
-<!-- src/modules/checkout/.instructions.md -->
-File: src/modules/checkout/.instructions.md
-applyTo: "**/*.vue,**/*.ts"
-
-Rules:
-- All prices in cents (not dollars) 
-- Use Pinia stores for state management
-- Components use "Checkout" prefix
-- Testing with Vitest + Testing Library
-```
-
-<div class="mt-8 p-4 bg-card rounded-lg">
-  <div class="text-lg font-bold text-primary mb-2">💡 How it works</div>
-  <div class="opacity-80">VS Code reads .instructions.md files and applies rules to matching file patterns within each module</div>
-</div>
-
----
-layout: default
----
-
-# Custom Instructions in Action
-
-````md magic-move
-```vue
-<!-- ❌ Without instructions -->
-<script setup>
-const price = ref(19.99) // Uses dollars
-const store = useStore() // Generic naming
-</script>
-
-<template>
-  <div class="item">
-    <span>${{ price }}</span>
-  </div>
-</template>
-```
-
-```vue
-<!-- ✅ With module instructions -->
-<script setup>
-const priceInCents = ref(1999) // Follows cents rule
-const checkoutStore = useCheckoutStore() // Module naming
-</script>
-
-<template>
-  <CheckoutCartItem>
-    <span>${{ (priceInCents / 100).toFixed(2) }}</span>
-  </CheckoutCartItem>
-</template>
-```
-````
-
----
 layout: center
 ---
 
-# The Context Problem
+# Why AI Coding tools love Modular
 
 <div class="grid grid-cols-2 gap-8 mt-8">
-  <div v-click="1" class="text-center">
-    <div class="text-5xl mb-4">😵‍💫</div>
-    <div class="font-bold text-xl mb-4">Flat Structure</div>
-    <div class="opacity-80">Copilot sees scattered files across many folders and struggles to understand feature relationships</div>
-  </div>
+  <FeatureCard
+    v-click="1"
+    icon="🎯"
+    title="Better Code Discovery"
+    description="AI tools can quickly find relevant files when they're grouped by feature rather than scattered across type-based folders"
+  />
   
-  <div v-click="2" class="text-center">
-    <div class="text-5xl mb-4">🎯</div>
-    <div class="font-bold text-xl mb-4">Modular Structure</div>
-    <div class="opacity-80">Copilot sees all related files together with module-specific instructions and suggests better code</div>
-  </div>
+  <FeatureCard
+    v-click="2"
+    icon="🧠"
+    title="Focused Context Windows"
+    description="Modular structure helps AI load only relevant code into its limited context, leading to more accurate suggestions"
+  />
 </div>
 
 ---
 layout: center
+---
+
+# What does *Context* mean in LLMs?
+
+<div class="grid grid-cols-3 gap-8 mt-8">
+  <FeatureCard
+    v-click="1"
+    icon="🧠"
+    title="Memory Window"
+    description="The text the model can 'see' at once"
+  />
+  
+  <FeatureCard
+    v-click="2"
+    icon="📜"
+    title="Tokens"
+    description="Measured in chunks of text (words/subwords)"
+  />
+  
+  <FeatureCard
+    v-click="3"
+    icon="⏳"
+    title="Limited"
+    description="Oldest tokens fall out when the window overflows"
+  />
+</div>
+
+<div v-click="4" class="mt-10 text-xl opacity-90">
+<strong>Context = the input window of tokens that conditions the model's output</strong>
+</div>
+---
+
+
+---
+layout: center
+---
+
+# Context is King
+
+<div class="text-lg opacity-80 mb-8">An AI coding assistant's context window is its greatest strength and weakness</div>
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <FeatureCard
+    icon="🧠"
+    title="The AI's Working Memory"
+    description="The tool puts all relevant information into this memory space to create a response"
+  />
+  
+  <FeatureCard
+    v-click="1"
+    icon="🎯"
+    title="Better Structure = Better Context"
+    description="Good project structure helps the AI find relevant code quickly, giving it useful information instead of clutter"
+  />
+</div>
+
+---
+layout: center
+---
+
+# Flat Structure: Context Chaos 😵
+
+<div class="text-lg opacity-80 mb-8">Let's ask the AI to <strong>"add a loading state to the cart"</strong></div>
+
+<div class="text-lg opacity-80 mb-8">The AI has to guess what's relevant from a huge components/ folder and scattered composables/</div>
+
+<div class="mt-8 p-6 border rounded-lg space-y-3 text-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+  <div><span class="text-red-400">❌</span> components/TodoList.vue</div>
+  <div><span class="text-green-400">✅</span> components/CartSummary.vue</div>
+  <div><span class="text-red-400">❌</span> composables/useTodos.ts</div>
+  <div><span class="text-red-400">❌</span> utils/dateHelpers.ts</div>
+  <div><span class="text-green-400">✅</span> composables/useCart.ts</div>
+</div>
+
+<div v-click="1" class="mt-8">
+  <FeatureCard
+    icon="⚠️"
+    title="Context Waste"
+    description="It wastes precious context on irrelevant files, leading to generic or incorrect suggestions"
+  />
+</div>
+
+---
+layout: center
+---
+
+# Modular Structure: Focused Context ✅
+
+<div class="text-lg opacity-80 mb-8">Let's ask the AI to <strong>"add a loading state to the cart"</strong></div>
+
+<div class="text-lg opacity-80 mb-8">The AI immediately knows to look inside the checkout module</div>
+
+<div class="mt-8 p-6 border rounded-lg space-y-3 text-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
+  <div><span class="text-green-400">✅</span> checkout/components/CartSummary.vue</div>
+  <div><span class="text-green-400">✅</span> checkout/components/CartItem.vue</div>
+  <div><span class="text-green-400">✅</span> checkout/composables/useCart.ts</div>
+  <div><span class="text-green-400">✅</span> checkout/store/cartStore.ts</div>
+  <div><span class="text-green-400">✅</span> checkout/types.ts</div>
+</div>
+
+<div v-click="1" class="mt-8">
+  <FeatureCard
+    icon="🎯"
+    title="Perfect Context"
+    description="Every token in the context window is relevant, resulting in highly accurate, project-aware code"
+  />
+</div>
+
+---
+layout: intro
+---
+
+# Improving the AI's Context
+## From Passive Structure to Active Guidance
+
+---
+layout: image
+image: '/images/markvim.png'
+backgroundSize: contain
+---
+
+---
+layout: image
+image: '/images/markvimeditor.png'
+backgroundSize: contain
+---
+
+---
+layout: image
+image: '/images/markvimModules.png'
+backgroundSize: contain
+---
+
+---
+layout: image
+image: '/images/markvim.png'
+backgroundSize: contain
+---
+
+---
+layout: image
+image: '/images/generateInstructions.png'
+backgroundSize: contain
+---
+
+---
+
+# copilot general instructions
+
+```md
+# MarkVim Development Instructions
+
+MarkVim is a Nuxt 3 Markdown editor with Vim mode support, built using a modular architecture.
+
+## Core Technologies & Framework Guidelines
+
+- **Nuxt 3** - Vue.js meta-framework with auto-imports
+- **Pinia** - State management with persistence to localStorage
+- **CodeMirror 6** - Editor component with vim extension
+- **UnoCSS** - Atomic CSS framework for styling
+- **TypeScript** - Strict typing with interface definitions
+- **Playwright + Cucumber** - E2E testing with BDD scenarios
+
+## Development Commands
+
+Install dependencies: `pnpm install`  
+Start dev server: `pnpm dev`  
+Build: `pnpm build`  
+Lint: `pnpm lint`  
+Type check: `pnpm typecheck`  
+E2E tests: `pnpm test:e2e`
+
+## Always look up Instructions first that could apply to a module
+```
+---
+
+# Custom Instructions per module
+
+```md
+---
+description: "Instructions for working with the shortcuts module"
+applyTo: "src/modules/shortcuts/**/*"
+---
+
+# Shortcuts Module Instructions
+
+## Module Purpose
+Manages application keyboard shortcuts, command palette functionality, 
+and command history for efficient user interaction.
+
+## Key Components
+- `CommandPalette.vue` - Searchable command interface
+- `composables/useShortcuts.ts` - Keyboard shortcut management
+- `composables/useCommandHistory.ts` - Command usage tracking
+```
+
+---
+layout: image
+image: '/images/shortCutInstruction.png'
+backgroundSize: contain
 ---
 
 ---
@@ -1039,6 +1180,7 @@ layout: two-cols-header
   <div class="text-lg font-bold text-primary mb-2">💡 Start Simple, Evolve When Needed</div>
   <div class="opacity-80">Begin with modular monolith. You can always extract modules into micro frontends later when organizational complexity demands it.</div>
 </div>
+
 
 ---
 layout: center
