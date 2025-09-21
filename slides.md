@@ -121,7 +121,7 @@ layout: center
     v-click="3"
     icon="📝"
     title="Hierarchical Naming"
-    description="Start with main words: SearchButtonClear.vue, SettingsCheckboxLaunch.vue"
+    description="Start with main words: SearchClearButton.vue"
   />
 </div>
 
