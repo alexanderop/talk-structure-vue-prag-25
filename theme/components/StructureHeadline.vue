@@ -1,5 +1,38 @@
 <template>
+  <!-- Static version for flat type -->
   <div 
+    v-if="type === 'flat'"
+    class="structure-headline relative overflow-hidden rounded-2xl p-8 mb-8"
+    :class="themeClass"
+  >
+    <!-- Content -->
+    <div class="relative z-10 text-center">
+      <div class="text-8xl mb-4 inline-block">
+        {{ icon }}
+      </div>
+      
+      <h2 class="text-4xl font-bold mb-3 text-white">
+        {{ title }}
+      </h2>
+      
+      <p class="text-xl opacity-90 text-white max-w-2xl mx-auto">
+        {{ subtitle }}
+      </p>
+      
+      <!-- Decorative elements -->
+      <div class="flex justify-center mt-6 space-x-2">
+        <div 
+          v-for="i in 3" 
+          :key="i"
+          class="w-2 h-2 rounded-full bg-white opacity-60"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animated version for micro type -->
+  <div 
+    v-else-if="type === 'micro'"
     class="structure-headline relative overflow-hidden rounded-2xl p-8 mb-8"
     :class="themeClass"
     v-motion
@@ -54,6 +87,37 @@
           v-motion
           :initial="{ scale: 0 }"
           :enter="{ scale: 1, transition: { duration: 400, delay: 1100 + i * 100 } }"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Static version for modular type -->
+  <div 
+    v-else
+    class="structure-headline relative overflow-hidden rounded-2xl p-8 mb-8"
+    :class="themeClass"
+  >
+    <!-- Content -->
+    <div class="relative z-10 text-center">
+      <div class="text-8xl mb-4 inline-block">
+        {{ icon }}
+      </div>
+      
+      <h2 class="text-4xl font-bold mb-3 text-white">
+        {{ title }}
+      </h2>
+      
+      <p class="text-xl opacity-90 text-white max-w-2xl mx-auto">
+        {{ subtitle }}
+      </p>
+      
+      <!-- Decorative elements -->
+      <div class="flex justify-center mt-6 space-x-2">
+        <div 
+          v-for="i in 3" 
+          :key="i"
+          class="w-2 h-2 rounded-full bg-white opacity-60"
         ></div>
       </div>
     </div>
