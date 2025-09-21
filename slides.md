@@ -28,24 +28,42 @@ backgroundSize: contain
 
 # The initial choice matters 
 
-<VClicks> 
-
-* Your initial choice shapes the entire development experience
-* What feels easy today might become your biggest bottleneck
-
-</VClicks>
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <FeatureCard
+    v-click="1"
+    icon="🎯"
+    title="Development Experience"
+    description="Your initial choice shapes the entire development experience"
+  />
+  
+  <FeatureCard
+    v-click="2"
+    icon="⚠️"
+    title="Future Bottlenecks"
+    description="What feels easy today might become your biggest bottleneck"
+  />
+</div>
 
 ---
 
 
 # What you will get in my talk 
 
-<VClicks>
-
-- A rule that maps team size, complexity, and timeline to structure
-- A side by side of Flat, Micro, and Modular
-
-</VClicks>
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <FeatureCard
+    v-click="1"
+    icon="📏"
+    title="Decision Framework"
+    description="A rule that maps team size, complexity, and timeline to structure"
+  />
+  
+  <FeatureCard
+    v-click="2"
+    icon="⚖️"
+    title="Structure Comparison"
+    description="A side by side of Flat, Micro, and Modular"
+  />
+</div>
 
 ---
 layout: two-cols
@@ -62,12 +80,11 @@ heading: About me
 <template v-slot:right>
 <VClicks class="space-y-2 mt-10 text-xl h-full">
 
-* 💼 Developer at Otto Payments 
-* 🇩🇪 Live in Germany
-* 🚀 7 years with Vue.js
-* 🎤 Speaker & Developer
-* 📝 Blogger  
-* 🌐 [https://alexop.dev](https://alexop.dev)
+* 🚀 7 years building with Vue.js
+* 💼 Developer at Otto Payments (Hamburg)
+* 🏡 Based in Geretsried (south of Munich, Bavaria)
+* ✍️ Blogger at alexop.dev
+* 🎤 Sharing & speaking about Vue, testing & GraphQL
 
 </VClicks>
 </template>
@@ -221,10 +238,11 @@ layout: two-cols-header
 
 <VClicks>
 
-- ✅ Simple setup (no extra configuration)
-- ✅ Fast to start coding
-- ✅ Easy to deploy 
-- ✅ Works great for small projects
+✅ Start fast with no setup
+
+✅ Great for small apps and prototypes
+
+✅ Simple to deploy
 
 </VClicks>
 
@@ -232,12 +250,17 @@ layout: two-cols-header
 
 <VClicks>
 
-- ❌ Changes touch many folders
-- ❌ Components folder gets huge
-- ❌ Hard to find feature-related code
-- ❌ Refactoring becomes painful
-- ❌ New developers get lost easily
-- ❌ Testing becomes unfocused
+❌ Components folder grows too big
+
+❌ You jump across many folders for one feature
+
+❌ New devs struggle to find code
+
+❌ Refactoring takes more effort
+
+❌ Hard to run only the tests for one feature
+
+❌ Team growth makes it worse
 
 </VClicks>
 
@@ -421,10 +444,13 @@ layout: two-cols-header
 
 <VClicks>
 
-- ✅ Independent teams & deployments
-- ✅ Mix different tech stacks
-- ✅ Failure isolation
-- ✅ Scales with organization
+✅ Each team owns its part
+
+✅ Teams can use different tech stacks
+
+✅ One part can fail without breaking the rest
+
+✅ Works well for very large orgs
 
 </VClicks>
 
@@ -432,10 +458,13 @@ layout: two-cols-header
 
 <VClicks>
 
-- ❌ Complex runtime setup
-- ❌ Bundle duplication overhead
-- ❌ Testing across remotes is hard
-- ❌ More DevOps complexity
+❌ Setup is complex
+
+❌ Bundles often duplicate code
+
+❌ Hard to test across apps
+
+❌ DevOps gets harder
 
 </VClicks>
 
@@ -600,11 +629,15 @@ layout: two-cols-header
 
 <VClicks>
 
-- ✅ Clear feature boundaries
-- ✅ Easier to navigate codebase
-- ✅ Better code reusability
-- ✅ Focused testing per module
-- ✅ AI-friendly structure
+✅ Clear feature boundaries
+
+✅ Easy to find and work on code
+
+✅ Code reuse is simple
+
+✅ Tests stay focused inside each module
+
+✅ AI tools understand features better
 
 </VClicks>
 
@@ -612,11 +645,15 @@ layout: two-cols-header
 
 <VClicks>
 
-- ❌ Initial setup complexity
-- ❌ More folder nesting
-- ❌ Potential for over-engineering
-- ❌ Module dependency management
-- ❌ Learning curve for teams
+❌ Setup takes more effort at the start
+
+❌ More folders to manage
+
+❌ Easy to over-engineer
+
+❌ Must manage module links and dependencies
+
+❌ Teams need to learn the pattern
 
 </VClicks>
 
