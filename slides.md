@@ -25,6 +25,12 @@ backgroundSize: contain
 ---
 
 ---
+layout: intro
+---
+
+# How to Structure Vue Projects
+
+---
 
 # The initial choice matters 
 
@@ -675,13 +681,6 @@ layout: center
 ---
 
 <StructureHeadline type="modular" />
-
----
-layout: intro
----
-
-# Raise your hand if you have  
-## worked on a modular monolith project
 
 ---
 layout: center

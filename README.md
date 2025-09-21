@@ -1,4 +1,6 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Vue Prag 2025 - How to Structure Vue Projects
+
+Slides for my Vue Prag 2025 presentation on structuring Vue projects.
 
 To start the slide show:
 
