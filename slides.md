@@ -33,14 +33,14 @@ backgroundSize: contain
     v-click="1"
     icon="🎯"
     title="Development Experience"
-    description="Your initial choice shapes the entire development experience"
+    description="Your first choice shapes how you build everything"
   />
   
   <FeatureCard
     v-click="2"
     icon="⚠️"
     title="Future Bottlenecks"
-    description="What feels easy today might become your biggest bottleneck"
+    description="What feels easy today becomes your biggest problem later"
   />
 </div>
 
@@ -54,14 +54,14 @@ backgroundSize: contain
     v-click="1"
     icon="📏"
     title="Decision Framework"
-    description="A rule that maps team size, complexity, and timeline to structure"
+    description="A simple guide that connects team size, how hard your app is, and time to the right setup"
   />
   
   <FeatureCard
     v-click="2"
     icon="⚖️"
     title="Structure Comparison"
-    description="A side by side of Flat, Micro, and Modular"
+    description="A direct look at Flat, Micro, and Modular side by side"
   />
 </div>
 
@@ -95,28 +95,28 @@ layout: center
 
 # General Rules & Best Practices
 
-<div class="text-lg opacity-80 mb-8">Apply these naming conventions to any Vue project structure</div>
+<div class="text-lg opacity-80 mb-8">Use these naming rules for any Vue project setup</div>
 
 <div class="grid grid-cols-3 gap-6 mt-8">
   <FeatureCard
     v-click="1"
     icon="🏷️"
     title="Base Component Prefix"
-    description="Use 'Base' prefix for UI components: BaseButton.vue, BaseTable.vue, BaseIcon.vue"
+    description="Start UI parts with 'Base': BaseButton.vue, BaseTable.vue, BaseIcon.vue"
   />
   
   <FeatureCard
     v-click="2"
     icon="🔗"
     title="Related Component Grouping"
-    description="Group related components: TodoList.vue, TodoListItem.vue, TodoListItemButton.vue"
+    description="Put linked parts together: TodoList.vue, TodoListItem.vue, TodoListItemButton.vue"
   />
   
   <FeatureCard
     v-click="3"
     icon="📝"
     title="Hierarchical Naming"
-    description="Start with highest-level words: SearchButtonClear.vue, SettingsCheckboxLaunch.vue"
+    description="Start with main words: SearchButtonClear.vue, SettingsCheckboxLaunch.vue"
   />
 </div>
 
@@ -127,7 +127,7 @@ layout: quote
 # Does your folder tree mirror your org chart?
 
 <QuoteCard author="Mel Conway">
-  "Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations."
+  "Organizations that design systems must create designs that copy how their teams talk to each other."
 </QuoteCard>
 
 Known as **Conway's Law**.
@@ -200,7 +200,7 @@ layout: center
 class: 'text-center'
 ---
 
-Flat structure means grouping files by <span v-mark.underline.red="1">what they are</span> 
+Flat structure groups files by <span v-mark.underline.red="1">what they are</span> 
 like <span v-mark.underline.red="2">components</span>, <span v-mark.underline.red="3">composables</span>, or <span v-mark.underline.red="4">utils</span> not by the feature they belong to.
 
 ---
@@ -281,13 +281,13 @@ layout: two-cols-header
 
 <VClicks>
 
-❌ Components folder grows too big
+❌ Parts folder gets too big
 
 ❌ You jump across many folders for one feature
 
-❌ New devs struggle to find code
+❌ New people can't find code fast
 
-❌ Refactoring takes more effort
+❌ Updating code takes more work
 
 ❌ Hard to run only the tests for one feature
 
@@ -314,7 +314,7 @@ class: 'text-center'
 ---
 
 <QuoteCard author="Luca Mezzalira">
-  "Microfrontends are the <span v-mark.underline.red="1">technical representation of a business subdomain</span>. They allow <span v-mark.underline.red="2">independent implementations</span> with <span v-mark.underline.red="3">minimal shared code</span> and single team ownership."
+  "Microfrontends show the <span v-mark.underline.red="1">technical side of a business part</span>. They let teams <span v-mark.underline.red="2">build separately</span> with <span v-mark.underline.red="3">little shared code</span> and single team ownership."
 </QuoteCard>
 
 ---
@@ -366,7 +366,7 @@ exposes: {
 </div>
 
 <div v-click="3">
-<strong>Each team owns their business subdomain</strong>
+<strong>Each team owns their business part</strong>
 </div>
 
 ---
@@ -548,7 +548,7 @@ import { Button } from '@tractor/shared'
 </div>
 
 <div v-click="3" class="text-2xl font-bold text-center mt-8" style="color: #FF6BED;">
-Shared components + tokens = visual cohesion
+Shared components + tokens = visual unity
 </div>
 
 ---
@@ -664,11 +664,11 @@ layout: two-cols-header
 
 ✅ Each team owns its part
 
-✅ Teams can use different tech stacks
+✅ Teams can use different tools
 
-✅ One part can fail without breaking the rest
+✅ One part can break without hurting others
 
-✅ Works well for very large orgs
+✅ Works well for big companies
 
 </VClicks>
 
@@ -676,13 +676,13 @@ layout: two-cols-header
 
 <VClicks>
 
-❌ Setup is complex
+❌ Hard to set up
 
-❌ Bundles often duplicate code
+❌ Code packages often repeat the same stuff
 
-❌ Hard to test across apps
+❌ Hard to test between apps
 
-❌ DevOps gets harder
+❌ Running apps gets harder
 
 </VClicks>
 
@@ -704,10 +704,10 @@ layout: center
 class: 'text-center'
 ---
 
-Modular monolith means grouping files by <span v-mark.underline.red="1">feature</span> 
+Modular monolith groups files by <span v-mark.underline.red="1">feature</span> 
 instead of <span v-mark.underline.red="2">file type</span>.
 
-It combines the <span v-mark.underline.red="3">simplicity of flat</span> with the <span v-mark.underline.red="4">organization of modules</span>.
+It mixes the <span v-mark.underline.red="3">simple flat style</span> with the <span v-mark.underline.red="4">neat module setup</span>.
 
 ---
 layout: default
@@ -775,7 +775,7 @@ layout: default
 
 # As Teams Grow, Workspaces Enhance Modular 👥
 
-<div class="text-lg opacity-80 mb-8">Simple folders work great, but workspaces solve import pain for larger teams</div>
+<div class="text-lg opacity-80 mb-8">Simple folders work great, but workspaces fix import problems for bigger teams</div>
 
 <div class="grid grid-cols-2 gap-8 mt-8">
   <div v-click="1" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
@@ -784,8 +784,8 @@ layout: default
     <div class="text-sm opacity-80 space-y-2">
       <div>• <code>../../../modules/checkout/composables/useCart</code></div>
       <div>• Long relative imports</div>
-      <div>• Hard to refactor paths</div>
-      <div>• No dependency isolation</div>
+      <div>• Hard to update paths</div>
+      <div>• Parts mix together</div>
     </div>
   </div>
   
@@ -794,16 +794,16 @@ layout: default
     <div class="font-bold text-lg mb-2" style="color: rgb(255, 107, 237);">Workspace Benefits</div>
     <div class="text-sm opacity-80 space-y-2">
       <div>• <code>@myapp/checkout/composables/useCart</code></div>
-      <div>• Clean package-style imports</div>
-      <div>• Easy refactoring support</div>
-      <div>• Independent module versions</div>
+      <div>• Clean, simple imports</div>
+      <div>• Easy to update</div>
+      <div>• Each module has its own version</div>
     </div>
   </div>
 </div>
 
 <div v-click="3" class="mt-8 p-4 bg-card rounded-lg">
   <div class="text-lg font-bold text-primary mb-2">🎯 Sweet Spot</div>
-  <div class="opacity-80">Workspaces are perfect when you have multiple developers working on different modules</div>
+  <div class="opacity-80">Workspaces work best when many people code different parts</div>
 </div>
 
 ---
@@ -892,22 +892,22 @@ layout: intro
 layout: center
 ---
 
-# Context is King
+# Context Rules Everything
 
-<div class="text-lg opacity-80 mb-8">An AI coding assistant's context window is its greatest strength and weakness</div>
+<div class="text-lg opacity-80 mb-8">AI tools have a memory space - this is both their best feature and biggest limit</div>
 
 <div class="grid grid-cols-2 gap-8 mt-8">
   <FeatureCard
     icon="🧠"
     title="The AI's Working Memory"
-    description="The tool puts all relevant information into this memory space to create a response"
+    description="The AI puts all the right info in this space to give you an answer"
   />
   
   <FeatureCard
     v-click="1"
     icon="🎯"
     title="Better Structure = Better Context"
-    description="Good project structure helps the AI find relevant code quickly, giving it useful information instead of clutter"
+    description="Good project setup helps AI find the right code fast, giving it helpful info instead of junk"
   />
 </div>
 
@@ -937,7 +937,7 @@ Let's ask the AI to <strong>"add a loading state to the cart"</strong>
     <FeatureCard
       icon="⚠️"
       title="Result: Context Waste"
-      description="60% irrelevant files waste precious context space"
+      description="60% wrong files waste space"
     />
   </div>
 </div>
@@ -968,7 +968,7 @@ Same request: <strong>"add a loading state to the cart"</strong>
     <FeatureCard
       icon="🎯"
       title="Result: Perfect Context"
-      description="100% relevant files = highly accurate code"
+      description="100% right files = very good code"
     />
   </div>
 </div>
@@ -1109,11 +1109,11 @@ layout: two-cols-header
 
 ✅ Clear feature boundaries
 
-✅ Easy to find and work on code
+✅ Easy to find and change code
 
-✅ Code reuse is simple
+✅ Easy to reuse code
 
-✅ Tests stay focused inside each module
+✅ Tests stay inside each part
 
 ✅ Ai loves it 
 
@@ -1123,15 +1123,15 @@ layout: two-cols-header
 
 <VClicks>
 
-❌ Setup takes more effort at the start
+❌ Takes more work to set up
 
 ❌ More folders to manage
 
-❌ Easy to over-engineer
+❌ Easy to make too complex
 
-❌ Must manage module links and dependencies
+❌ Need to manage how parts connect
 
-❌ Teams need to learn the pattern
+❌ Teams need to learn this way
 
 </VClicks>
 
@@ -1144,26 +1144,26 @@ layout: two-cols-header
   <div v-click="1" class="p-6 border-2 rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(255, 107, 237);">
     <div class="text-5xl mb-4">✅</div>
     <div class="font-bold text-2xl mb-4" style="color: rgb(255, 107, 237);">Modular Monolith</div>
-    <div class="text-lg opacity-90 mb-4">Default choice for most projects</div>
+    <div class="text-lg opacity-90 mb-4">Best pick for most projects</div>
     <div class="text-sm opacity-80 space-y-1">
       <div>• Works for all team sizes</div>
-      <div>• Easier to maintain and refactor</div>
-      <div>• Better developer experience</div>
-      <div>• VS Code/Copilot-friendly structure</div>
-      <div>• Faster iteration cycles</div>
+      <div>• Easier to keep up and update</div>
+      <div>• Better coding experience</div>
+      <div>• Works great with VS Code and Copilot</div>
+      <div>• Faster work cycles</div>
     </div>
   </div>
   
   <div v-click="2" class="p-6 border rounded-lg" style="background-color: rgb(52, 63, 96); border-color: rgb(171, 75, 153);">
     <div class="text-5xl mb-4">⚠️</div>
     <div class="font-bold text-2xl mb-4" style="color: rgb(255, 107, 237);">Micro Frontends</div>
-    <div class="text-lg opacity-90 mb-4">Only with organizational need</div>
+    <div class="text-lg opacity-90 mb-4">Only when your company needs it</div>
     <div class="text-sm opacity-80 space-y-1">
-      <div>• Multiple independent teams</div>
-      <div>• Different deployment cycles</div>
-      <div>• Technology diversity required</div>
-      <div>• Complex domain boundaries</div>
-      <div>• High operational maturity</div>
+      <div>• Many separate teams</div>
+      <div>• Different release times</div>
+      <div>• Need different tools</div>
+      <div>• Hard business splits</div>
+      <div>• Strong DevOps skills</div>
     </div>
   </div>
 </div>
