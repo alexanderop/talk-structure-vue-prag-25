@@ -52,7 +52,6 @@ layout: intro
 
 ---
 
-
 # What you will get in my talk 
 
 <div class="grid grid-cols-2 gap-8 mt-8">
@@ -60,7 +59,7 @@ layout: intro
     v-click="1"
     icon="📏"
     title="Decision Framework"
-    description="A simple guide that connects team size, how hard your app is, and time to the right setup"
+    description="A simple guide that connects team size, how complex your app is, and time to the right setup"
   />
   
   <FeatureCard
@@ -79,15 +78,15 @@ heading: About me
 <template v-slot:default>
 <div class="flex flex-col justify-center items-center h-full">
   <img class="w-75 rounded-full" src="https://avatars.githubusercontent.com/u/33398393?v=4" />
-  <h2 class="mt-4">Alexander Opalic</h2>
+  <h2 class="mt-4">Alex Opalic</h2>
 </div>
 </template>
 
 <template v-slot:right>
 <VClicks class="space-y-2 mt-10 text-xl h-full">
 
-* 🚀 7 years building with Vue.js
-* 💼 Developer at Otto Payments (Hamburg)
+* 🚀 7 years building with Vue
+* 💼 Developer at Otto Payments
 * 🏡 Based in Geretsried (south of Munich, Bavaria)
 * ✍️ Blogger at alexop.dev
 * 🎤 Sharing & speaking about Vue, testing & GraphQL & Ai
@@ -1175,6 +1174,3 @@ layout: center
     color="#3B82F6"
   />
 </div>
-
-
-
