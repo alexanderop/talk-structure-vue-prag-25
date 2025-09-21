@@ -84,7 +84,7 @@ heading: About me
 * 💼 Developer at Otto Payments (Hamburg)
 * 🏡 Based in Geretsried (south of Munich, Bavaria)
 * ✍️ Blogger at alexop.dev
-* 🎤 Sharing & speaking about Vue, testing & GraphQL
+* 🎤 Sharing & speaking about Vue, testing & GraphQL & Ai
 
 </VClicks>
 </template>
@@ -119,22 +119,6 @@ layout: center
     description="Start with main words: SearchButtonClear.vue, SettingsCheckboxLaunch.vue"
   />
 </div>
-
----
-layout: quote
----
-
-# Does your folder tree mirror your org chart?
-
-<QuoteCard author="Mel Conway">
-  "Organizations that design systems must create designs that copy how their teams talk to each other."
-</QuoteCard>
-
-Known as **Conway's Law**.
-
-<!--
-Tie their vote to this idea. Now they care about structure choices.
--->
 
 ---
 layout: center
