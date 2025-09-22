@@ -1031,7 +1031,7 @@ E2E tests: `pnpm test:e2e`
 
 ---
 
-# .instructions.md
+# shortcuts.instructions.md
 
 ```md
 ---
