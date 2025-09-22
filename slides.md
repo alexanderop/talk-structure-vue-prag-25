@@ -52,14 +52,14 @@ layout: intro
 
 ---
 
-# What you will get in my talk 
+# What you will learn
 
 <div class="grid grid-cols-2 gap-8 mt-8">
   <FeatureCard
     v-click="1"
     icon="📏"
     title="Decision Framework"
-    description="A simple guide that connects team size, how complex your app is, and time to the right setup"
+    description="A simple guide that connects team size, how complex your app is, and time"
   />
   
   <FeatureCard
@@ -121,7 +121,7 @@ layout: center
     v-click="3"
     icon="📝"
     title="Hierarchical Naming"
-    description="Start with main words: SearchClearButton.vue"
+    description="Start with main words: SearchButtonClear.vue SettingsCheckboxTerms"
   />
 </div>
 
@@ -270,15 +270,13 @@ layout: two-cols-header
 
 <VClicks>
 
-❌ Parts folder gets too big
+❌ Components folder gets too big
 
 ❌ You jump across many folders for one feature
 
-❌ New people can't find code fast
+❌ Refactoring code takes more work
 
-❌ Updating code takes more work
-
-❌ Hard to run only the tests for one feature
+❌ Hard to run tests per Feature
 
 ❌ Team growth makes it worse
 
@@ -295,7 +293,7 @@ layout: intro
 ---
 
 # Raise your hand if you have  
-## worked on a project that used microfrontends
+## worked on a project that used Microfrontends
 
 ---
 layout: quote
@@ -352,10 +350,6 @@ exposes: {
 }
 ```
   </div>
-</div>
-
-<div v-click="3">
-<strong>Each team owns their business part</strong>
 </div>
 
 ---
@@ -420,10 +414,6 @@ window.getComponent = (id: string) => loadRemote(id)
 
 </div>
 
-<div v-click="3">
-<strong>Load components dynamically with fallbacks</strong>
-</div>
-
 ---
 layout: default
 ---
@@ -458,10 +448,6 @@ function remote(id: string) {
 }
 ```
 
-</div>
-
-<div v-click="3">
-<strong>Single source of truth for navigation</strong>
 </div>
 
 ---
@@ -499,10 +485,6 @@ window.addEventListener('add-to-cart', (e) => {
 
 </div>
 
-<div v-click="3">
-<strong>No shared store - explicit events only</strong>
-</div>
-
 ---
 layout: default
 ---
@@ -534,10 +516,6 @@ import { Button } from '@tractor/shared'
 </template>
 ```
 
-</div>
-
-<div v-click="3" class="text-2xl font-bold text-center mt-8" style="color: #FF6BED;">
-Shared components + tokens = visual unity
 </div>
 
 ---
@@ -651,9 +629,9 @@ layout: two-cols-header
 
 <VClicks>
 
-✅ Each team owns its part
+✅ Each team can deploy on their own
 
-✅ Teams can use different tools
+✅ Teams can use different tech stack
 
 ✅ One part can break without hurting others
 
@@ -665,13 +643,13 @@ layout: two-cols-header
 
 <VClicks>
 
-❌ Hard to set up
+❌ The first setup takes time and skill
 
-❌ Code packages often repeat the same stuff
+❌ Shared look and feel can drift without rules
 
-❌ Hard to test between apps
+❌ Testing across apps is slow and tricky
 
-❌ Running apps gets harder
+❌ Debugging end to end gets harder
 
 </VClicks>
 
@@ -777,7 +755,7 @@ layout: default
     <div class="text-sm opacity-80 space-y-2">
       <div>• <code>@myapp/checkout/composables/useCart</code></div>
       <div>• Clean, simple imports</div>
-      <div>• Easy to update</div>
+      <div>• You move files without fixing paths</div>
       <div>• Each module has its own version</div>
     </div>
   </div>
@@ -874,22 +852,22 @@ layout: intro
 layout: center
 ---
 
-# Context Rules Everything
+# Context is King
 
-<div class="text-lg opacity-80 mb-8">AI tools have a memory space - this is both their best feature and biggest limit</div>
+<div class="text-lg opacity-80 mb-8">Llms tools have a memory space this is both their best feature and biggest limit</div>
 
 <div class="grid grid-cols-2 gap-8 mt-8">
   <FeatureCard
     icon="🧠"
-    title="The AI's Working Memory"
-    description="The AI puts all the right info in this space to give you an answer"
+    title="The LLms's Working Memory"
+    description="The Llm puts all the right info in this space to give you an answer"
   />
   
   <FeatureCard
     v-click="1"
     icon="🎯"
     title="Better Structure = Better Context"
-    description="Good project setup helps AI find the right code fast, giving it helpful info instead of junk"
+    description="Good project setup helps Llms find the right code fast, giving it helpful info instead of junk"
   />
 </div>
 
@@ -960,7 +938,6 @@ layout: intro
 ---
 
 # Improving the AI's Context
-## From Passive Structure to Active Guidance
 
 ---
 layout: image
@@ -1024,7 +1001,7 @@ backgroundSize: contain
 
 ---
 
-# General instructions
+# .github/copilot-instructions.md 
 
 ```md
 # MarkVim Development Instructions
@@ -1051,9 +1028,10 @@ Type check: `pnpm typecheck`
 E2E tests: `pnpm test:e2e`
 
 ```
+
 ---
 
-# Custom Instructions per module
+# .instructions.md
 
 ```md
 ---
@@ -1095,9 +1073,11 @@ layout: two-cols-header
 
 ✅ Easy to reuse code
 
-✅ Tests stay inside each part
+✅ Run tests per Feature
 
 ✅ Ai loves it 
+
+✅ Easy to go into MicroFrontend Setup
 
 </VClicks>
 
@@ -1107,11 +1087,7 @@ layout: two-cols-header
 
 ❌ Takes more work to set up
 
-❌ More folders to manage
-
-❌ Easy to make too complex
-
-❌ Need to manage how parts connect
+❌ Need clear Rules so Modules stay isolated
 
 ❌ Teams need to learn this way
 
