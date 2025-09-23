@@ -185,12 +185,11 @@ layout: center
 <StructureHeadline type="flat" />
 
 ---
-layout: center
-class: 'text-center'
+layout: intro
 ---
 
-Flat structure groups files by <span v-mark.underline.red="1">what they are</span> 
-like <span v-mark.underline.red="2">components</span>, <span v-mark.underline.red="3">composables</span>, or <span v-mark.underline.red="4">utils</span> not by the feature they belong to.
+Flat structure groups files by what they are  
+like components, composables, or utils, not by the feature they belong to.
 
 ---
 layout: default
@@ -256,19 +255,14 @@ layout: two-cols-header
 
 ::left::
 
-<VClicks>
-
 ✅ Start fast with no setup
 
 ✅ Great for small apps and prototypes
 
 ✅ Simple to deploy
 
-</VClicks>
 
 ::right::
-
-<VClicks>
 
 ❌ Components folder gets too big
 
@@ -279,8 +273,6 @@ layout: two-cols-header
 ❌ Hard to run tests per Feature
 
 ❌ Team growth makes it worse
-
-</VClicks>
 
 ---
 layout: center
@@ -326,7 +318,7 @@ layout: default
   <div v-click="1">
     <div class="text-xl font-bold mb-4 text-primary">Team Structure</div>
     
-```
+```shell
 apps/
 ├── host/      ← Platform Team
 ├── explore/   ← Discovery Team  
@@ -360,7 +352,7 @@ layout: default
 
 <div v-click="1">
 
-```yaml
+```ts
 # pnpm-workspace.yaml
 packages:
   - 'apps/*'
@@ -371,7 +363,7 @@ packages:
 
 <div v-click="2">
 
-```
+```shell
 tractor-store-mf/
 ├── apps/
 │   ├── host/     ← Shell app
@@ -393,6 +385,8 @@ layout: default
 <div v-click="1">
 
 ```ts
+import { createInstance, loadRemote } from '@module-federation/enhanced/runtime'
+
 // Host loads remotes at runtime
 createInstance({
   name: 'host',
@@ -409,7 +403,12 @@ createInstance({
 <div v-click="2">
 
 ```ts
-window.getComponent = (id: string) => loadRemote(id)
+window.getComponent = (id: string) => {
+  return async () => {
+    const mod = await loadRemote(id) as any
+    return mod.default || mod
+  }
+}
 ```
 
 </div>
@@ -421,23 +420,9 @@ layout: default
 # 🚦 Routing: Host Owns All Routes
 
 <div v-click="1">
-
 ```ts
-// Host router maps URLs to remote components
-const router = createRouter({
-  routes: [
-    { path: '/', component: remote('explore/HomePage') },
-    { path: '/product/:id', component: remote('decide/ProductPage') },
-    { path: '/checkout/cart', component: remote('checkout/CartPage') },
-  ]
-})
-```
+import { defineAsyncComponent } from 'vue'
 
-</div>
-
-<div v-click="2">
-
-```ts
 // remote() loads with fallbacks
 function remote(id: string) {
   return defineAsyncComponent({
@@ -447,7 +432,20 @@ function remote(id: string) {
   })
 }
 ```
+`</div>
+<div v-click="2">
+```ts
+import { createRouter, createWebHistory } from 'vue-router'
 
+// Host router maps URLs to remote components
+const router = createRouter({
+  routes: [
+    { path: '/', component: remote('explore/HomePage') },
+    { path: '/product/:id', component: remote('decide/ProductPage') },
+    { path: '/checkout/cart', component: remote('checkout/CartPage') },
+  ]
+})
+```
 </div>
 
 ---
@@ -627,8 +625,6 @@ layout: two-cols-header
 
 ::left::
 
-<VClicks>
-
 ✅ Each team can deploy on their own
 
 ✅ Teams can use different tech stack
@@ -637,11 +633,7 @@ layout: two-cols-header
 
 ✅ Works well for big companies
 
-</VClicks>
-
 ::right::
-
-<VClicks>
 
 ❌ The first setup takes time and skill
 
@@ -650,8 +642,6 @@ layout: two-cols-header
 ❌ Testing across apps is slow and tricky
 
 ❌ Debugging end to end gets harder
-
-</VClicks>
 
 ---
 layout: center
@@ -1031,7 +1021,7 @@ E2E tests: `pnpm test:e2e`
 
 ---
 
-# shortcuts.instructions.md
+# .github/instructions/shortcuts.instructions.md
 
 ```md
 ---
@@ -1065,8 +1055,6 @@ layout: two-cols-header
 
 ::left::
 
-<VClicks>
-
 ✅ Clear feature boundaries
 
 ✅ Easy to find and change code
@@ -1079,11 +1067,8 @@ layout: two-cols-header
 
 ✅ Easy to go into MicroFrontend Setup
 
-</VClicks>
-
 ::right::
 
-<VClicks>
 
 ❌ Takes more work to set up
 
@@ -1091,7 +1076,7 @@ layout: two-cols-header
 
 ❌ Teams need to learn this way
 
-</VClicks>
+❌ No independent Deploy
 
 ---
 
